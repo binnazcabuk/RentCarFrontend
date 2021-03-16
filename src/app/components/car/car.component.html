@@ -1,0 +1,27 @@
+<div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div *ngFor="let car of cars" class="col">
+          <div class="card shadow-sm">
+            <img   src="assets/images/default.jpg" class="img-thumbnail" alt="carimage" width="304" height="236"> 
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Marka: {{car.brandName}}</li>
+                    <li class="list-group-item">Renk: {{car.colorName}}</li>
+                    <li class="list-group-item">Açıklama: {{car.description}} </li>
+                  </ul>
+              <div class="d-flex justify-content-between align-items-center">
+
+                <div class="btn-group">
+                  <button routerLink="/cars/car-detail/{{car.carId}}" type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

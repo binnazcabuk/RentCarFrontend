@@ -1,0 +1,8 @@
+
+  <div class="list-group">
+    <button routerLink="/cars" type="button" id="brand" class="list-group-item list-group-item-action "  aria-current="true">
+      Brand
+    </button>
+    <button (click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" type="button"   [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands">{{ brand.brandName }} </button>
+    
+  </div>

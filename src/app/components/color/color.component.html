@@ -1,0 +1,8 @@
+
+  <div class="list-group">
+    <button routerLink="/cars" type="button" id="brand" id="color" class="list-group-item list-group-item-action " align="center" aria-current="true">
+     color
+    </button>
+    <button (click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}" [class]="getCurrentColorClass(color)" type="button"  *ngFor="let color of colors">{{color.colorName}}</button>
+    
+  </div>
