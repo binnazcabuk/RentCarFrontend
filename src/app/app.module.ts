@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +13,7 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { RentalComponent } from './components/rental/rental.component';
 import {HttpClientModule} from '@angular/common/http';
 import { CardetailComponent } from './components/cardetail/cardetail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +24,7 @@ import { CardetailComponent } from './components/cardetail/cardetail.component';
     CustomerComponent,
     RentalComponent,
     CardetailComponent
+   
   ],
   imports: [
     BrowserModule,

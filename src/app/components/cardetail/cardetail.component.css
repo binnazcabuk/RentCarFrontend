@@ -1,0 +1,20 @@
+.card-img-top {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+  .card-header {
+    text-align: center;
+  }
+
+  .table {
+    text-align: center;
+    border-collapse: collapse;
+    
+  }
+
+  .table th {
+    background-color: #b6bdb6;
+    max-width: 75rem;
+  }
