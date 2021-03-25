@@ -1,8 +1,13 @@
 
   <div class="list-group">
-    <button routerLink="/cars" type="button" id="brand" id="color" class="list-group-item list-group-item-action " align="center" aria-current="true">
-     color
+    <div class="mb-0">
+      <label for="filterText" class="form-label">Renk Ara</label>
+      <input type="text" [(ngModel)]="colorText" class="form-control" id="colorText" placeholder="Renk Giriniz...">
+    </div>
+    <br>
+    <button routerLink="/cars" type="button" id="brand" id="color" class="list-group-item list-group-item-action "  aria-current="true">
+     Color
     </button>
-    <button (click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}" [class]="getCurrentColorClass(color)" type="button"  *ngFor="let color of colors">{{color.colorName}}</button>
+    <button (click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}" [class]="getCurrentColorClass(color)" type="button"  *ngFor="let color of colors |colorPipe:colorText">{{color.colorName}}</button>
     
   </div>

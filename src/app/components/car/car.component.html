@@ -1,23 +1,23 @@
-
+<app-car-filter></app-car-filter>
 <div class="album py-5 bg-light">
   <div class="container">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     
-      <div *ngFor="let car of cars " class="col">
+      <div *ngFor="let car of cars" class="col">
         <div class="card bg-light rounded-2 shadow overflow-hidden">
           <img  src="https://localhost:44377/Images/{{car.imagePath}}" width="100%" height="225" class="card-img-top" alt="..."> 
-
+         
           <div class="card-body">
             <ul class="list-group list-group-flush"> 
              
-              <li class="list-group-item">Marka: {{car.brandName}}</li>
+              <li class="list-group-item">Marka: {{car.brandName |uppercase}}</li>
               <li class="list-group-item">Model Yıl:   {{ car.modelYear }}</li>
             
               
               <li class="list-group-item">Açıklama: {{car.description}}</li>
              
-              <h1 class="card-title pricing-card-title">  <p class="mt-1 card-text text-primary fs-3">${{ car.dailyPrice }}</p></h1>
+              <h1 class="card-title pricing-card-title">  <p class="mt-1 card-text text-primary fs-3">${{ car.dailyPrice}}</p></h1>
           
             
              

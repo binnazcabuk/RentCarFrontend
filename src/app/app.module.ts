@@ -13,7 +13,11 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { RentalComponent } from './components/rental/rental.component';
 import {HttpClientModule} from '@angular/common/http';
 import { CardetailComponent } from './components/cardetail/cardetail.component';
-
+import { VatAddedPipe } from './pipes/vat-added.pipe';
+import { BrandPipePipe } from './pipes/brand-pipe.pipe';
+import{FormsModule} from "@angular/forms";
+import { CarFilterComponent } from './components/car-filter/car-filter.component';
+import { ColorPipePipe } from './pipes/color-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,13 +27,18 @@ import { CardetailComponent } from './components/cardetail/cardetail.component';
     ColorComponent,
     CustomerComponent,
     RentalComponent,
-    CardetailComponent
+    CardetailComponent,
+    VatAddedPipe,
+    BrandPipePipe,
+    CarFilterComponent,
+    ColorPipePipe
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
