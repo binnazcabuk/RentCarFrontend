@@ -1,39 +1,46 @@
+<div *ngFor="let car of cars" class="card mb-3" style="max-width: 75rem">
+  <div class="card-header">
+    <h4>{{ car.brandName }} {{ car.description }}</h4>
+  </div>
+  <br />
+  <img
+    class="card-img-top"
+    src="https://localhost:44377/Images/{{ car.imagePath }}"
+    style="max-width: 40rem"
+    alt="Card image cap"
+  />
 
+  <div class="card-body">
+    <table class="table" style="max-width: 75rem">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Renk</th>
+          <th>Model Yılı</th>
+          <th>Fiyat</th>
+          <th>Açıklama</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr>
+        <td>{{ car.model }}</td>
+        <td>{{ car.colorName }}</td>
+        <td>{{ car.modelYear }}</td>
+        <td>{{ car.dailyPrice }}</td>
+        <td>{{ car.description }}</td>
 
-    <div *ngFor="let car of cars" class="card mb-3 " style="max-width: 75rem;">
-      <div class="card-header" > <h4>{{car.brandName}} {{car.description}}</h4></div>
-      <br>
-      <img class="card-img-top"  src="https://localhost:44377/Images/{{car.imagePath}}" style="max-width: 40rem;" alt="Card image cap">
-    
-      <div class="card-body">
-        <table class="table" style="max-width: 75rem;" >
-     
-          <thead>
-              <tr>
-                  
-                  <th>Model</th>
-                  <th>Renk</th>
-                  <th>Model Yılı</th>
-                  <th>Fiyat</th>
-                  <th>Açıklama</th>
-                  <th></th>
-                  
-       
-              </tr>
-          </thead>
-          <tr  >
-              
-       
-              <td>{{car.model}}</td>
-              <td>{{car.colorName}}</td>
-              <td>{{car.modelYear}}</td>
-              <td>{{car.dailyPrice}}</td>
-              <td>{{car.description}}</td>
-              <td ><button routerLink="/cars/rental/{{car.carId}}"  type="button" class="btn btn-warning">Kirala</button></td>
-              
-            
-              
-          </tr>
-          </table>
-      </div>
-    </div>
+        <td *ngIf="rentFlag">ARAÇ KİRALANMIŞ</td>
+
+        <td *ngIf="!rentFlag">
+          <button
+            routerLink="/cars/rental/{{ car.carId }}"
+            type="button"
+            class="btn btn-warning"
+          >
+            Kirala
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

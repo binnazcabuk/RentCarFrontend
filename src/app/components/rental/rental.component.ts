@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,5 +12,5 @@ export class RentalComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+ 
 }
