@@ -1,46 +1,93 @@
-<div *ngFor="let car of cars" class="card mb-3" style="max-width: 75rem">
-  <div class="card-header">
-    <h4>{{ car.brandName }} {{ car.description }}</h4>
-  </div>
-  <br />
-  <img
-    class="card-img-top"
-    src="https://localhost:44377/Images/{{ car.imagePath }}"
-    style="max-width: 40rem"
-    alt="Card image cap"
-  />
-
-  <div class="card-body">
-    <table class="table" style="max-width: 75rem">
-      <thead>
-        <tr>
-          <th>Model</th>
-          <th>Renk</th>
-          <th>Model Yılı</th>
-          <th>Fiyat</th>
-          <th>Açıklama</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tr>
-        <td>{{ car.model }}</td>
-        <td>{{ car.colorName }}</td>
-        <td>{{ car.modelYear }}</td>
-        <td>{{ car.dailyPrice }}</td>
-        <td>{{ car.description }}</td>
-
-        <td *ngIf="rentFlag">ARAÇ KİRALANMIŞ</td>
-
-        <td *ngIf="!rentFlag">
-          <button
-            routerLink="/cars/rental/{{ car.carId }}"
+<div class="card" >
+  
+  <div class="card-header text-center">
+    <div class="card-body">
+      <div  *ngFor="let car of cars"class="card-header">{{car.brandName}} / {{car.model}}</div>
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner  d-flex "
+           style="height: 50vh; min-height: 20rem; max-height: 30rem">
+  
+            <div *ngFor="let image of carImages; index as i; first as firstImage"
+            
+            class="carousel-item align-self-center"
+              [ngClass]="{ active: firstImage }"
+            style="height: 100%; width: 100%">
+               <img
+            src="https://localhost:44377/Images/{{image.imagePath}}"
+            class=""
+            style="height: 100%; width: 100%; object-fit: contain"
+            alt="imageUrl + image.imagePath"
+          />
+            </div>
+           </div>
+            <button
+            class="carousel-control-prev"
             type="button"
-            class="btn btn-warning"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev"
           >
-            Kirala
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
           </button>
-        </td>
-      </tr>
-    </table>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+  
+      </div>
   </div>
-</div>
+  
+<div *ngFor="let car of cars" class="details col-md-6" style="max-width: 75rem">
+ 
+   
+
+    
+  <div class="card-body">
+
+   
+    <table class="table table-striped" >
+   
+      <thead>
+          <tr>
+              <th>Id</th>
+              <th>Marka</th>
+              <th>Renk</th>
+              <th>Model Yılı</th>
+              <th>Fiyat</th>
+              <th>Açıklama</th>
+              
+              
+   
+          </tr>
+      </thead>
+      <tr  >
+          <td>{{car.carId}} </td>
+          <td>{{car.brandName}}</td>
+          <td>{{car.colorName}}</td>
+          <td>{{car.modelYear}}</td>
+          <td>{{car.dailyPrice | currency: '₺' }}</td>
+          <td>{{car.description}}</td>
+      </tr>
+  
+      
+  </table>
+  
+       
+          <div class="action">
+            <div *ngIf="rentFlag"  class="alert alert-danger"><b>ARAÇ KİRALANMIŞ</b></div>
+            <button *ngIf="!rentFlag"  class="add-to-cart btn btn-default" type="button">
+              <app-rental-add *ngIf="!rentFlag" [car]="cars"></app-rental-add>
+            </button>
+          </div>
+          
+          
+
+          </div>
+     
+   
+  </div>
+
+ 
+  </div>
+ 

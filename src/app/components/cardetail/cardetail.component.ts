@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { start } from 'node:repl';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carimage';
+import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { CarDetailService } from 'src/app/services/car-detail.service';
+import { CarImagesService } from 'src/app/services/car-images.service';
+import { CustomerService } from 'src/app/services/customer.service';
+import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
@@ -12,14 +18,21 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./cardetail.component.css']
 })
 export class CardetailComponent implements OnInit {
-
+ 
   carImages:CarImage[]=[];
-  cars:Car[]=[];
+  cars:Car[];
+ 
   rental: Rental[]=[];
-  
+ 
   rentFlag = false;
-
-  constructor(private carDetailService:CarDetailService,private activatedRoute:ActivatedRoute,private rentalService:RentalService) { }
+ 
+ 
+  
+  constructor(private carDetailService:CarDetailService,private activatedRoute:ActivatedRoute,private rentalService:RentalService,
+    private customerService: CustomerService, private router: Router,
+    
+    private toastrService: ToastrService,
+    private paymentServise: PaymentService) { }
 
   ngOnInit(): void {
     
@@ -28,30 +41,33 @@ export class CardetailComponent implements OnInit {
         this.getCarsById(params["carId"])
         this.getImagesById(params["carId"])
         this.getRent(params['carId'])
-       
-        // this.getRentalsByCarId(params["id"])
-        
-      }
+         
       
-  });
+      }
+        
+    });
   }
   getCarsById(id:number){
     this.carDetailService.getCarDetailById(id).subscribe(response=>{
       this.cars=response.data;
     })
   }
-
+ 
   getImagesById(id:number){
     this.carDetailService.getCarImagesById(id).subscribe(response=>{
       this.carImages=response.data;
       
+      
     })
   }
-
+  
   getRent(carId: number) {
     this.rentalService.getRentalByCar(carId).subscribe((response) => {
-      this.rental = response.data.filter((rent:Rental)=>rent.returnDate==null);
+      this.rental = response.data.filter((rent:Rental)=>rent.status==true);
+    
+   
       if(this.rental.length>0){
+       
         this.rentFlag=true;
       }
       else{
@@ -59,4 +75,6 @@ export class CardetailComponent implements OnInit {
       }
     });
   }
+
+  
 }
