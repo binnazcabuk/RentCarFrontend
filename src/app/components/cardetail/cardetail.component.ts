@@ -20,13 +20,18 @@ import { RentalService } from 'src/app/services/rental.service';
 export class CardetailComponent implements OnInit {
  
   carImages:CarImage[]=[];
-  cars:Car[];
+  cars:Car[]=[];
  
   rental: Rental[]=[];
  
   rentFlag = false;
- 
- 
+  minDate:Date = new Date();
+  rentTime:number;
+  rentDate:Date;
+  returnDate:Date;
+  maxDate:Date = new Date();
+  minSelected:boolean;
+  carId: number;
   
   constructor(private carDetailService:CarDetailService,private activatedRoute:ActivatedRoute,private rentalService:RentalService,
     private customerService: CustomerService, private router: Router,
@@ -75,6 +80,8 @@ export class CardetailComponent implements OnInit {
       }
     });
   }
+
+  
 
   
 }

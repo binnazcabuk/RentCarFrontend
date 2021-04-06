@@ -18,7 +18,7 @@ export class CarComponent implements OnInit {
 
   cars:Car[]=[];
   filterText="";
-
+image=false;
   constructor(private carService:CarService,  private activatedRoute:ActivatedRoute,
     ) { }
 
@@ -43,6 +43,8 @@ export class CarComponent implements OnInit {
   getCars(){
     this.carService.getCars().subscribe(response=>{
       this.cars=response.data;
+     
+      
     })
   }
  

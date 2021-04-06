@@ -76,9 +76,10 @@
        
           <div class="action">
             <div *ngIf="rentFlag"  class="alert alert-danger"><b>ARAÇ KİRALANMIŞ</b></div>
-            <button *ngIf="!rentFlag"  class="add-to-cart btn btn-default" type="button">
-              <app-rental-add *ngIf="!rentFlag" [car]="cars"></app-rental-add>
+            <button *ngIf="!rentFlag"  class="add-to-cart btn btn-default" routerLink="/cardetail/rental/{{car.carId}}">Kirala
+             
             </button>
+            
           </div>
           
           
@@ -90,4 +91,4 @@
 
  
   </div>
- 
+  

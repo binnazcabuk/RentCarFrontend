@@ -1,0 +1,45 @@
+<div class="row mt-4">
+   <div class="col-lg-9">
+
+      <div class="card rounded-0">
+         <div class="card-header fw-bold">
+            <i class="bi-plus-square me-1"></i> Yeni Araba Ekle
+         </div>
+         <div class="card-body">
+            <form autocomplete="off" [formGroup]="brandAddForm" (ngSubmit)="add()" >
+
+            
+              
+               <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="brandName" placeholder="brandName"
+                         formControlName="brandName">
+                  <label for="brandName">marka Adı </label>
+               </div>
+
+               <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="model" placeholder="model"
+                         formControlName="model">
+                  <label for="model">Model adı</label>
+               </div>
+
+             
+
+               <div class="text-end">
+                  <button type="button" class="btn btn-primary rounded-0 px-4 fw-bold" (click)="add()">
+                     <i class="bi-plus-square me-1"></i> Ekle
+                  </button>
+               </div>
+            </form>
+         </div>
+      </div>
+
+   </div>
+   <div class="col-lg-3">
+      <div class="d-grid">
+      <button type="button" class="btn " data-bs-toggle="modal" routerLink="/brandlist"  style="margin-right: 16px">
+              <img src="assets/img/back.png" width="35">
+            </button>
+         
+      </div>
+   </div>
+</div>

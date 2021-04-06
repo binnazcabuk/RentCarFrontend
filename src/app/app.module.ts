@@ -11,6 +11,7 @@ import { CarComponent } from './components/car/car.component';
 import { ColorComponent } from './components/color/color.component';
 import { CustomerComponent } from './components/customer/customer.component';
 
+
 import {HttpClientModule} from '@angular/common/http';
 import { CardetailComponent } from './components/cardetail/cardetail.component';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
@@ -23,6 +24,11 @@ import { RentalAddComponent } from './components/rental-add/rental-add.component
 import{BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { RentalComponent } from './components/rental/rental.component';
+import { CarListComponent } from './components/car-list/car-list.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { BrandListComponent } from './components/brand-list/brand-list.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { BrandUpdateDeleteComponent } from './components/brand-update-delete/brand-update-delete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +46,12 @@ import { RentalComponent } from './components/rental/rental.component';
     PaymentComponent,
     RentalAddComponent,
     CarAddComponent,
-    RentalComponent
+    RentalComponent,
+    CarListComponent,
+    CarUpdateComponent,
+    BrandListComponent,
+    BrandAddComponent,
+    BrandUpdateDeleteComponent
    
   ],
   imports: [

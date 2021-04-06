@@ -1,13 +1,14 @@
 
-  <div class="list-group">
+
     
     <div class="mb-0">
       <input type="text" [(ngModel)]="brandText" class="form-control" id="brandText" placeholder="Marka Giriniz...">
     </div>
     <br>
-    <button routerLink="/cars"  type="button" id="brand" class="list-group-item list-group-item-action "  aria-current="true">
-      Brand
-    </button>
-    <button (click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" type="button"   [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands |brandPipe:brandText">{{ brand.brandName }} </button>
+    <select class="form-select" size="5" aria-label="size 3 select example" >
+  <option routerLink="/cars"  selected>Tüm Markalar</option>
+  <option value="1"(click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" type="button"   [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands |brandPipe:brandText">{{ brand.brandName }} </option>
+
+</select>
+   
     
-  </div>

@@ -9,7 +9,8 @@ export interface Car {
     dailyPrice: number;
     description: string;
     modelYear: string;
-    imagePath:string;
+    imagePath?:string;
     model:string;
+    minFindeksScore?:number;
   }
   

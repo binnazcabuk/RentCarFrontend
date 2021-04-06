@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Rental } from '../models/rental';
+import { RentalDetails } from '../models/rentalDetails';
 import { ResponceModel } from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +29,18 @@ export class RentalService {
     let newPath = this.apiUrl + "rentals/checkcarstatus";
     return this.httpClient.post<ResponceModel>(newPath,rental);
   }
-  
+  addRental(rental: Rental) {
+    let newPath = this.apiUrl + 'rentals/add';
+    this.httpClient.post(newPath, rental).subscribe();
+  }
+
+  getRentalByCarId(carId:number) : Observable<SingleResponseModel<RentalDetails>>{
+    let newPath = this.apiUrl+"rentals/getrentaldetailbycarid?carId="+carId;
+    return this.httpClient.get<SingleResponseModel<RentalDetails>>(newPath);
+  }
+
+  getRentalByUserId(userId:number) : Observable<ListResponseModel<RentalDetails>>{
+    let newPath = this.apiUrl+"rentals/getrentaldetailbyuserid?userid="+userId;
+    return this.httpClient.get<ListResponseModel<RentalDetails>>(newPath);
+  }
 }
