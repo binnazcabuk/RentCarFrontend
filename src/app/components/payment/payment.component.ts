@@ -10,6 +10,14 @@ import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
 import { RentalDetails } from 'src/app/models/rentalDetails';
+import { FormBuilder, FormGroup, Validators,FormControl} from '@angular/forms';
+import { Findex } from 'src/app/models/findex';
+import { CartItem } from 'src/app/models/cartItem';
+import { Payment } from 'src/app/models/payment';
+import { PaymentService } from 'src/app/services/payment.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { FindeksService } from 'src/app/services/findeks.service';
+import { CarDetailService } from 'src/app/services/car-detail.service';
 
 @Component({
   selector: 'app-payment',
@@ -18,44 +26,167 @@ import { RentalDetails } from 'src/app/models/rentalDetails';
 })
 export class PaymentComponent implements OnInit {
 
-  rental: RentalDetails;
-  cars: Car;
-  customer: Customer;
-  getCustomerId: number;
-  amountOfPayment: number = 0;
-  nameOnTheCard: string;
-  cardNumber: string;
-  cardCvv: string;
-  expirationDate: string;
-  fakeCard: FakeCard;
-  cardExist: Boolean = false;
-  moneyInTheCard:number;
+  creditCardForm:FormGroup;
+  creditCards:FakeCard[]=[]
+ customers:Customer[]=[];
 
-  constructor(private activateRoute: ActivatedRoute,
-    private carService: CarService,
-    private customerService: CustomerService,
-    private router: Router,
-    private toastrService: ToastrService,
+  cartItems: CartItem[] = [];
+  totalAmount: number;
+  months:number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+  years:number[] = [];
+  rental: RentalDetails;
+  cars: Car[] = [];
+  payment: Payment;
+  calculatedRentPrice:number;
+
+  constructor(private carService:CarDetailService,
+    private router: Router, private toastrService: ToastrService,
+     private paymentService: PaymentService,
     private rentalService: RentalService,
-    private fakeCardService: FakecardService) { }
+    private creditCardService:FakecardService,
+    private formBuilder:FormBuilder,
+    public authService:AuthService,
+   
+  ) { }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe((params) => {
-      if (params['rental']) {
-        this.rental = JSON.parse(params['rental']);
-        this.getCustomerId = JSON.parse(params['rental']).customerId;
-        this.getCustomerDetailById(this.getCustomerId);
-        
-      }
+    this.createCreditCardForm();
+
+    this.creditCardForm.patchValue({
+      userId:this.authService.userId,
+       
     });
+    
+    this.getAllByUserId(this.authService.userId)
+    this.getCart();
+    this.getCarDetail(this.cartItems[0].rental.carId);
+    this.createYearsArray();
+      
+   
+   
+    
   }
 
-  getCustomerDetailById(customerId: number) {
-    this.customerService.getCustomerById(customerId).subscribe((response) => {
-      this.customer = response.data[0];
-      console.log(response);
-    });
+
+  createCreditCardForm(){
+    this.creditCardForm=this.formBuilder.group({
+      userId: ["",Validators.required],
+      name: ["",Validators.required],
+      creditCardNumber:["",Validators.required],
+      month:["",Validators.required],
+      year:["",Validators.required],
+      ccv:["",Validators.required]
+    })
   }
 
- 
+  add(){
+    if(this.creditCardForm.valid){
+    //  console.log(this.creditCardForm.value);
+     let creditCardModel= Object.assign({},this.creditCardForm.value)    
+     this.creditCardService.add(creditCardModel).subscribe(response=>{
+       this.toastrService.success(response.message,"başarılı")
+     }  ,responseError=>{
+       console.log(responseError.error)
+     })
+     
+   }else{
+     this.toastrService.info("Kayıtlı kartınız kullanıldı.","Dikkat")
+ } 
+  
+ }
+ getAllByUserId(userId:number){
+  this.creditCardService.getCreditCardByUserId(userId).subscribe(response=>{
+    this.creditCards=response.data 
+  })
+ }
+
+ checkCreditCards(){
+  if(this.creditCards!=null){
+    return true
+  }
+  else{
+    return false
+  }
+}
+
+  createYearsArray(){
+    let currentYear:number = new Date().getFullYear();
+    for(let i = currentYear; i <= currentYear+15;i++){
+      this.years.push(i);
+    }
+
+}
+
+
+
+
+getCarDetail(id: number) {
+  this.carService.getCarDetailById(id).subscribe(response => {
+
+    //console.log(this.cars);
+
+    if (this.cartItems[0].rental.returnDate != null) {
+      var rentDate = new Date(this.cartItems[0].rental.rentDate);
+      var returnDate = new Date(this.cartItems[0].rental.returnDate);
+      var difference = returnDate.getTime() - rentDate.getTime();
+      var calculatedDays = Math.ceil(difference / (1000 * 3600 * 24));
+    } else {
+      var calculatedDays = 0;
+    }
+    this.calculatedRentPrice = calculatedDays * this.cars[0].dailyPrice;
+
+  })
+}
+getCart() {
+  this.cartItems = this.paymentService.listCart();
+}
+
+postRent(cartItem: CartItem) {
+
+  let rental: Rental = {
+    carId: cartItem.rental.carId,
+    customerId: cartItem.rental.customerId,
+    rentDate: cartItem.rental.rentDate,
+    returnDate: cartItem.rental.returnDate ? cartItem.rental.returnDate : null,
+
+  }
+  //console.log(rental);
+
+  this.rentalService.add(rental).subscribe(response => {
+    if (response.success) {
+      this.toastrService.success("Kiralama işlemi başarıyla gerçekleşti.");
+      this.router.navigate(['/cars']);
+      this.toastrService.info("Araç kiralama başarıyla tamamlandı ana sayfaya dönüyorsunuz.");
+    } else {
+      this.toastrService.error("Kiralama işlemi gerçekleşemedi.");
+
+    }
+  })
+}
+
+postPayment(cartItem: CartItem) {
+  if (cartItem.rental.returnDate != null) {
+    var rentDate = new Date(cartItem.rental.rentDate);
+    var returnDate = new Date(cartItem.rental.returnDate);
+    var difference = returnDate.getTime() - rentDate.getTime();
+    var calculatedDays = Math.ceil(difference / (1000 * 3600 * 24));
+  } else {
+    var calculatedDays = 0;
+  }
+  let payment: Payment = {
+    carId: this.cartItems[0].rental.carId,
+    userId: this.cartItems[0].rental.customerId,
+    totalAmount: this.cars[0].dailyPrice * calculatedDays,
+  }
+  //console.log(payment);
+
+  this.paymentService.addPayment(payment).subscribe(response =>{
+    if (response.success == true) {
+      this.toastrService.success("Ödeme işlemi gerçekleşti.");
+      this.postRent(cartItem);
+    }else{
+      this.toastrService.success("Ödeme esnasında bir problem oluştu.");
+    }
+  });
+}
 }

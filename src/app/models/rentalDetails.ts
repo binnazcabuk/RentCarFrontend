@@ -7,7 +7,7 @@ export interface RentalDetails{
         companyName?:string;
         firstName?:string;
         lastName?:string;
-        rentDate?:Date;
+        rentDate:Date;
         returnDate?:any;
         carId?:number;
         userId?:number;

@@ -12,7 +12,7 @@ import { ColorComponent } from './components/color/color.component';
 import { CustomerComponent } from './components/customer/customer.component';
 
 
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { CardetailComponent } from './components/cardetail/cardetail.component';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { BrandPipePipe } from './pipes/brand-pipe.pipe';
@@ -29,6 +29,14 @@ import { CarUpdateComponent } from './components/car-update/car-update.component
 import { BrandListComponent } from './components/brand-list/brand-list.component';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { BrandUpdateDeleteComponent } from './components/brand-update-delete/brand-update-delete.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AccountComponent } from './components/account/account.component';
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +59,9 @@ import { BrandUpdateDeleteComponent } from './components/brand-update-delete/bra
     CarUpdateComponent,
     BrandListComponent,
     BrandAddComponent,
-    BrandUpdateDeleteComponent
+    BrandUpdateDeleteComponent,
+    LoginComponent,
+    AccountComponent
    
   ],
   imports: [
@@ -63,9 +73,18 @@ import { BrandUpdateDeleteComponent } from './components/brand-update-delete/bra
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
-    })
+    }),
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: tokenGetter,
+      }
+    }),
+   
   ],
-  providers: [],
+  providers: [
+    {
+provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

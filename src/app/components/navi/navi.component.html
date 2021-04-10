@@ -1,25 +1,18 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="" href="#">Anasayfa</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <a class="navbar-brand" href="#" style= "text-decoration: lightsalmon; font-family:cursive; ">ReCap Project</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" routerLink="cars">Anasayfa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"   href="#">a</a>
+            <a class="nav-link" href="#">Link</a>
           </li>
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -38,26 +31,61 @@
               <li><a class="dropdown-item" href="#">Renkler</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link disabled"
-              href="#"
-              tabindex="-1"
-              aria-disabled="true"
-              >Disabled</a
-            >
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        
+         
+            
+         </ul>
+       
+        <!-- <form class="d-flex">
+          <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+         placeholder="Açıklama ara..">
+          <button class="btn btn-outline-success" type="submit" >Search</button>
+        </form> -->
       </div>
     </div>
-  </nav>
+    <div *ngIf="!isAuthenticated()">
+      <form class="d-flex"> 
+        <button style="background-color: rgb(201, 241, 119);" class="btn btn-outline-success" routerLink="/register">Kayıt Ol</button>
+        <button style="background-color: rgb(201, 241, 119);" class="btn btn-outline-success" routerLink="/login">Giriş Yap</button>
+      </form>
+    </div>
+    <div *ngIf="isAuthenticated()" class="dropdown">
+      <form class="d-flex"> 
+      <button style="background-color: yellowgreen;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false"> {{authService.name}} {{authService.surname}}</button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+               <li><a class="dropdown-item" routerLink="/account"><b>Hesap Bilgileri</b></a></li>
+                
+               
+              </ul>
+             <!-- Button trigger modal -->
+<button  style="background-color: red; width: 100px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Çıkış Yap
+</button>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Çıkış Yapmak İstediğinizden Emin Misiniz?</h5>
+        <button style="background-color: yellowgreen;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-footer">
+        <button style="background-color: yellowgreen;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+        <button style="background-color:red;" (click)="logout()" type="button" class="btn btn-primary" data-bs-dismiss="modal" >Çıkış Yap</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+               
+     
+   
   
+    
+  </nav>

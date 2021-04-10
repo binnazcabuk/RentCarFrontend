@@ -11,6 +11,7 @@ export interface Car {
     modelYear: string;
     imagePath?:string;
     model:string;
-    minFindeksScore?:number;
+    minFindexScore:number;
+    
   }
   

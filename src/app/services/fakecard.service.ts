@@ -14,24 +14,13 @@ export class FakecardService {
 
   constructor( private httpClient:HttpClient) { }
 
-  isCardExist(fakeCard:FakeCard):Observable<ResponceModel>{
-    let newPath = this.apiUrl + "fakecards/iscardexist";
-    console.log(fakeCard);
-    return this.httpClient.post<ResponceModel>(newPath,fakeCard);
-  }
+  add(creditCard:FakeCard):Observable<ResponceModel>{
+    let newPath=this.apiUrl+"fakecards/add"
+    return this.httpClient.post<ResponceModel>(newPath,creditCard)
+   }
 
-  getCardByNumber(cardNumber:string):Observable<ListResponseModel<FakeCard>>{
-    let newPath = this.apiUrl + "fakecards/getbycardnumber?cardnumber=" + cardNumber;
-    return this.httpClient.get<ListResponseModel<FakeCard>>(newPath);
-  }
-
-  updateCard(fakeCard:FakeCard){
-    let newPath = this.apiUrl + "fakecards/update";
-    this.httpClient.put(newPath,fakeCard)
-  }
-
-  getCreditCardByUserId(userId:number):Observable<ListResponseModel<FakeCard>>{
-    let newPath=this.apiUrl+"creditCards/getallbyuserid?userId="+userId
+   getCreditCardByUserId(userId:number):Observable<ListResponseModel<FakeCard>>{
+    let newPath=this.apiUrl+"fakecards/getallbyuserid?userId="+userId
     return this.httpClient.get<ListResponseModel<FakeCard>>(newPath);
 
   }

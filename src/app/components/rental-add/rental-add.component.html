@@ -3,29 +3,21 @@
      
         
     <h5 class="card-header">Araç Kirala</h5>
-    <div class="card-body" *ngFor="let car of cars">
+    <div class="card-body" >
         <div class="mb-3 row">
             <label for="inputPassword" class="col-lg-auto col-form-label">Ücret</label>
-            <div class="col-lg" >
+            <div class="col-lg" *ngFor="let car of cars">
                 <input class="form-control" type="text" placeholder="{{car.dailyPrice | currency: '₺'}}"
                     aria-label="Disabled input example" disabled>
             </div>
         </div>
-        <div class="row">
-            <!-- 
-            <select class="form-select col-lg" [(ngModel)]="customerId">
-                <option [value]="customer.userId" *ngFor="let customer of customers">
-                     
-                    {{ customer.companyName }}
-                </option>
-            </select> -->
-            <label for="inputPassword" class="col-lg-auto col-form-label">Şirket</label>
-            <div class="col-lg" >
-            <input class="form-control" type="text" placeholder="{{customers.userId}}"
+        <div class="row"  >
+          <input class="form-control" type="text" placeholder="{{customers.userId}}"
            value="{{customers.userId}}"
             aria-label="Disabled input example" disabled>
+
         </div>
-        </div>
+        
         <label for="example-date-input" class="col-lg-auto col-form-label">Başlangıç</label>
         
         <input [(ngModel)]="rentDateValue" class="form-control" min="{{ getRentMinDate() }}" value="{{ getRentMinDate() }}" type="date"
@@ -35,7 +27,8 @@
         <input class="form-control" type="date" min="{{ getReturnMinDate() }}" value="{{ getReturnMinDate() }}"
             [(ngModel)]="returnDate" />
         <div class="d-grid gap-2">
-            <button routerLink="/payment" class="btn btn-warning btn-block mt-3"  (click)="checkClick()">Aracı
+        
+            <button   class="btn btn-warning btn-block mt-3"  (click)="checkClick()">Aracı
                 Kirala</button>
            
         </div>
