@@ -1,5 +1,5 @@
 
-  <div class="list-group">
+  <div *ngIf="isAuthenticated()" class="list-group">
     <div class="mb-0">
       <label for="filterText" class="form-label">Renk Ara</label>
       <input type="text" [(ngModel)]="colorText" class="form-control" id="colorText" placeholder="Renk Giriniz...">

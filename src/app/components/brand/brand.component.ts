@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
+import { AuthService } from 'src/app/services/auth.service';
 import { BrandService } from 'src/app/services/brand.service';
 
 @Component({
@@ -14,10 +15,11 @@ export class BrandComponent implements OnInit {
   currentBrand: Brand;
  
   brandText="";
-  constructor(private brandService: BrandService) { }
+  constructor(private brandService: BrandService,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.getBrands();
+    this.isAuthenticated();
   }
   getBrands() {
     this.brandService.getBrands().subscribe((response) => {
@@ -42,4 +44,14 @@ export class BrandComponent implements OnInit {
       return "list-group-item"
     }
 }
+
+isAuthenticated(){
+  if(this.authService.isAuthenticated()){
+    return true
+    
+  }
+  else{
+    return false
+  }
+ }
 }
