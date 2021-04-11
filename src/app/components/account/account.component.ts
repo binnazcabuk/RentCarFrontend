@@ -16,8 +16,17 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-   
+    if(this.isAuthenticated()){
+      this.authService.userDetailFromToken(); 
+     this.createUpdateForm() 
+     this.updateForm.patchValue({
+      id:this.authService.userId,
+      firstName: this.authService.name,
+      lastName: this.authService.surname,
+      email:this.authService.email  
+    });
   }
+}
 
   createUpdateForm(){
     this.updateForm=this.formBuilder.group({
