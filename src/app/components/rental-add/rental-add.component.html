@@ -27,8 +27,10 @@
         <input class="form-control" type="date" min="{{ getReturnMinDate() }}" value="{{ getReturnMinDate() }}"
             [(ngModel)]="returnDate" />
         <div class="d-grid gap-2">
-        
-            <button   class="btn btn-warning btn-block mt-3"  (click)="checkClick()">Aracı
+
+        <button *ngIf="rentFlag" class="btn btn-warning btn-block mt-3"  >findex yetersiz
+               </button>
+            <button *ngIf="!rentFlag"  class="btn btn-warning btn-block mt-3"  (click)="checkClick()">Aracı
                 Kirala</button>
            
         </div>

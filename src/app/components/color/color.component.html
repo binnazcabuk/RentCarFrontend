@@ -5,9 +5,11 @@
       <input type="text" [(ngModel)]="colorText" class="form-control" id="colorText" placeholder="Renk Giriniz...">
     </div>
     <br>
-    <button routerLink="/cars" type="button"  id="color" class="list-group-item list-group-item-action "  aria-current="true">
-     Color
-    </button>
-    <button (click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}" [class]="getCurrentColorClass(color)" type="button"  *ngFor="let color of colors |colorPipe:colorText">{{color.colorName}}</button>
-    
+
+     <select class="form-select" size="5" aria-label="size 3 select example" >
+  <option   selected>Renkler</option>
+  <option value="1"(click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}" type="button"   [class]="getCurrentColorClass(color)" *ngFor="let color of colors |colorPipe:colorText">{{color.colorName}}</option>
+
+</select>
+   
   </div>

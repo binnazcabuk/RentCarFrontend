@@ -6,7 +6,7 @@
     </div>
     <br>
     <select class="form-select" size="5" aria-label="size 3 select example" >
-  <option routerLink="/cars"  selected>Tüm Markalar</option>
+  <option   selected>Markalar</option>
   <option value="1"(click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" type="button"   [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands |brandPipe:brandText">{{ brand.brandName }} </option>
 
 </select>

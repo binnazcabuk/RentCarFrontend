@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import{FormGroup,FormBuilder,FormControl,Validators} from"@angular/forms";
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Console } from 'node:console';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
 
@@ -21,9 +22,11 @@ export class BrandUpdateDeleteComponent implements OnInit {
   constructor( private brandService: BrandService,
    private activatedRoute: ActivatedRoute,
    private formBuilder: FormBuilder,
-   private toastrService: ToastrService) { }
+   private toastrService: ToastrService,
+   private router: Router) { }
 
   ngOnInit(): void {
+
    this.createBrandUpdateForm();
 
    this.activatedRoute.params.subscribe((params) => {
@@ -38,8 +41,10 @@ export class BrandUpdateDeleteComponent implements OnInit {
      this.brands = response.data[0];
     
      this.createBrandUpdateForm();
+     
    });
  }
+
   createBrandUpdateForm() {
    this.brandUpdateForm = this.formBuilder.group({
      brandId: [this.brands.brandName, Validators.required],

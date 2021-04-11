@@ -34,9 +34,9 @@ export class BrandService {
     return this.httpClient.post<ResponceModel>(newPath,brand)
   }
  
-  update(brand:Brand):Observable<ListResponseModel<Brand>>{
+  update(brand:Brand):Observable<ResponceModel>{
     let newPath = this.apiUrl2 + "brands/update";
-    return this.httpClient.post<ListResponseModel<Brand>>(newPath,brand);
+    return this.httpClient.post<ResponceModel>(newPath,brand);
   }
 
   

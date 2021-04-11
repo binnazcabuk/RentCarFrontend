@@ -14,6 +14,9 @@ import { RentalAddComponent } from './components/rental-add/rental-add.component
 import { LoginComponent } from './components/login/login.component';
 import { LoginGuard } from './guards/login.guard';
 import { AccountComponent } from './components/account/account.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { ColorUpdateComponent } from './components/color-update/color-update.component';
+import { ColorListComponent } from './components/color-list/color-list.component';
 
 
 const routes: Routes = [  
@@ -33,6 +36,9 @@ const routes: Routes = [
 {path:"brandlist/update/:brandId", component:BrandUpdateDeleteComponent},
 {path:"login",component:LoginComponent},
 {path:"account",component:AccountComponent},
+{path:"color-add",component:ColorAddComponent},
+{path:"colorlist/update/:colorId",component:ColorUpdateComponent},
+{path:"colorlist",component:ColorListComponent}
 ];
 
 

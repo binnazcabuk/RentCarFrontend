@@ -33,6 +33,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AccountComponent } from './components/account/account.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { ColorUpdateComponent } from './components/color-update/color-update.component';
+import { ColorListComponent } from './components/color-list/color-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -61,7 +64,10 @@ export function tokenGetter() {
     BrandAddComponent,
     BrandUpdateDeleteComponent,
     LoginComponent,
-    AccountComponent
+    AccountComponent,
+    ColorAddComponent,
+    ColorUpdateComponent,
+    ColorListComponent
    
   ],
   imports: [

@@ -1,0 +1,45 @@
+
+  <div class="table-responsive">
+    <table  class="table table-striped table-bordered">
+      
+      <thead>
+        <tr>
+       
+          <th scope="col">#</th>
+       
+          <th scope="col">Color Name</th>
+           <th scope="col">İşlemler</th>
+         
+          <th scope="col-auto" >
+          <button type="button" class="btn" data-bs-toggle="modal" routerLink="/color-add"  title="Renk Ekle" style="margin-right: 16px">
+              <img src="assets/img/plus.png" width="45">
+            </button>
+           
+          </th>
+        </tr>
+      
+      </thead>
+      
+      <tbody>
+        <tr *ngFor="let color of colors">
+         
+        <td></td>
+          <td>{{color.colorName}}</td>
+          
+        
+
+          <td>
+            <button routerLink="/colorlist/update/{{color.colorId}}" type="button" 
+            class="btn "> <img src="assets/img/updated.png" width="36"></button>
+
+          
+          </td>
+         
+        </tr>
+        
+
+      </tbody>
+    </table>
+    
+  </div>
+

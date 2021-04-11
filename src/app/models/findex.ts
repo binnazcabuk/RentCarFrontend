@@ -1,5 +1,4 @@
 export interface Findex{
-    id:number;
-    userId:number;
+    minFindexScore:number;
     findexScore:number;
 }

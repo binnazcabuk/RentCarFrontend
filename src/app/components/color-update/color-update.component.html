@@ -1,0 +1,30 @@
+<div class="content">
+    <div class="col-md-6 ">
+      <div class="card">
+        <div class="flex-wrap justify-content-center">
+        <div class="card-header"><h5 class="title">Update Color</h5></div>
+        <div class="card-body">
+          <form [formGroup]="colorUpdateForm">
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="colorName"
+                class="form-control"
+                [(ngModel)]="color.colorName"
+                placeholder="Color Name"
+              />
+            </div>
+          </form>
+        </div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <button (click)="update()" type="button" class="btn btn-primary">
+           Güncelle
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>

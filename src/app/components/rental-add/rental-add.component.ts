@@ -1,13 +1,13 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { ThisReceiver } from '@angular/compiler';
-import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
+
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
 import { Findex } from 'src/app/models/findex';
+
 import { Rental } from 'src/app/models/rental';
 import { RentalDetails } from 'src/app/models/rentalDetails';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +15,7 @@ import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { FindeksService } from 'src/app/services/findeks.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -31,24 +31,23 @@ export class RentalAddComponent implements OnInit {
   cars:Car[]=[]
   carDetails:Car;
   customers: Customer;
-
+  findexScore:number;
   customerId: number;
   rentDate: Date;
   returnDate: Date;
   rentDateValue: Date;
   rentalCar: RentalDetails;
- 
-  rentFlag = true;
+  minFindexScore:number;
+  rentFlag = false;
  
   constructor( private carService: CarService,
     private carDetailByIdService:CarDetailService,
     private activatedRoute: ActivatedRoute,
-    private rentalService: RentalService,
+
     private paymentService: PaymentService,
     private router : Router,
     public authService:AuthService,
   
-    private findexService:FindeksService,
     private customerService : CustomerService,
     private toastrService : ToastrService,
   
@@ -68,13 +67,13 @@ export class RentalAddComponent implements OnInit {
     })
    
     this.getCustomerByUserId(this.authService.userId);
-   
+    
    
   }
 
   getCustomerByUserId(userId:number){
     this.customerService.getCustomersByUserId(userId).subscribe(response => {
-     // console.log(response.data)
+      
       this.customers = response.data;
     })
   }
@@ -82,7 +81,8 @@ export class RentalAddComponent implements OnInit {
 
   getCarsById(carId:number){
       this.carDetailByIdService.getCarDetailById(carId).subscribe(response=>{     
-       this.cars=response.data;    
+       this.cars=response.data;   
+       
       })
   }
       
@@ -107,24 +107,42 @@ export class RentalAddComponent implements OnInit {
       rentDate: this.rentDate,
       returnDate: this.returnDate?this.returnDate:null,
       carId: this.cars[0].carId,
-      customerId:this.customers.userId,
+      customerId:this.customers.userId
     }
+
+    
+    
     
     this.paymentService.addToCart(MyRental);
-   // console.log(this.paymentService.listCart());
     
     this.router.navigate(['/payments/']);
     this.toastrService.info("Ödeme sayfasına yönlendiriliyorsunuz...", "Ödeme İşlemleri");
   
   }
-  
+
+
   checkClick(){
+
+    let m:Findex={
+      minFindexScore:this.cars[0].minFindexScore,
+      findexScore:this.customers.findexScore
+
+    }
+
+    if(m.findexScore<m.minFindexScore){
+      this.rentFlag=true
+     
+    }
+    else{
+      this.rentFlag=false
+    }
+    
     if (this.rentDate==null && this.returnDate==null && this.customerId==null) {
       this.toastrService.warning('Lütfen boş bilgi bırakmayın', 'Dikkat');
       return;
    }
-   else if(this.rentFlag==false){
-    this.toastrService.warning('findex puan yeterli değil ', 'Dikkat');
+   else if(this.rentFlag==true){
+    this.toastrService.warning('Findex Yetersiz', 'Dikkat');
    }
 else{
 

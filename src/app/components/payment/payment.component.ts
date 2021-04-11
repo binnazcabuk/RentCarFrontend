@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { FakecardService } from 'src/app/services/fakecard.service';
+
 import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
-import { FakeCard } from 'src/app/models/fakeCard';
+
 import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -18,6 +18,8 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FindeksService } from 'src/app/services/findeks.service';
 import { CarDetailService } from 'src/app/services/car-detail.service';
+import { CreditCardService } from 'src/app/services/credit-card.service';
+import { CreditCard } from 'src/app/models/creditCard';
 
 @Component({
   selector: 'app-payment',
@@ -27,7 +29,7 @@ import { CarDetailService } from 'src/app/services/car-detail.service';
 export class PaymentComponent implements OnInit {
 
   creditCardForm:FormGroup;
-  creditCards:FakeCard[]=[]
+  creditCards:CreditCard[]=[]
  customers:Customer[]=[];
 
   cartItems: CartItem[] = [];
@@ -43,7 +45,7 @@ export class PaymentComponent implements OnInit {
     private router: Router, private toastrService: ToastrService,
      private paymentService: PaymentService,
     private rentalService: RentalService,
-    private creditCardService:FakecardService,
+    private creditCardService:CreditCardService,
     private formBuilder:FormBuilder,
     public authService:AuthService,
    
@@ -51,7 +53,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCreditCardForm();
-
+   
     this.creditCardForm.patchValue({
       userId:this.authService.userId,
        
@@ -61,9 +63,6 @@ export class PaymentComponent implements OnInit {
     this.getCart();
     this.getCarDetail(this.cartItems[0].rental.carId);
     this.createYearsArray();
-      
-   
-   
     
   }
 
@@ -78,11 +77,13 @@ export class PaymentComponent implements OnInit {
       ccv:["",Validators.required]
     })
   }
+ 
 
   add(){
     if(this.creditCardForm.valid){
     //  console.log(this.creditCardForm.value);
-     let creditCardModel= Object.assign({},this.creditCardForm.value)    
+     let creditCardModel= Object.assign({},this.creditCardForm.value)   
+     
      this.creditCardService.add(creditCardModel).subscribe(response=>{
        this.toastrService.success(response.message,"başarılı")
      }  ,responseError=>{
@@ -122,8 +123,8 @@ export class PaymentComponent implements OnInit {
 
 getCarDetail(id: number) {
   this.carService.getCarDetailById(id).subscribe(response => {
-
-    //console.log(this.cars);
+   this.cars=response.data;
+     console.log(this.cars);
 
     if (this.cartItems[0].rental.returnDate != null) {
       var rentDate = new Date(this.cartItems[0].rental.rentDate);
@@ -182,8 +183,9 @@ postPayment(cartItem: CartItem) {
 
   this.paymentService.addPayment(payment).subscribe(response =>{
     if (response.success == true) {
-      this.toastrService.success("Ödeme işlemi gerçekleşti.");
       this.postRent(cartItem);
+      this.toastrService.success("Ödeme işlemi gerçekleşti.");
+      
     }else{
       this.toastrService.success("Ödeme esnasında bir problem oluştu.");
     }
