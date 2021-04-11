@@ -1,6 +1,26 @@
 # RentCarFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
+**Proje Özellikleri**
+
+-Kiralama sistemine girmeden önce kullanıcıları karşılayan login sayfası
+
+-Dinamik tablolar, filtreler ve sayfalama
+
+-Rol bazlı yetkilendirme 
+
+-Kullanıcı yönetimi 
+
+-Kategori işlemleri (Kategori ekleme, düzenleme işlemleri)
+
+-Araç İşlemleri (Araç ekleme, düzenleme işlemleri)
+
+-İşlem onayları 
+
+-Kredi kartıyla veya önceden kayıt edilmiş kredi kartlarıyla ödeme yapabilme
+
+-Kiralama sırasında otomatik findeks puanı  sorgulama
+
+-Kiralamalarda günlük ücretlerin hesaplanması
 
 ## Development server
 
