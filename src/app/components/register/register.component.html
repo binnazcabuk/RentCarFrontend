@@ -1,0 +1,33 @@
+
+<body class="text-center">
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Kayıt Ol </h2>
+  
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/img/user.png" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form  [formGroup]="registerForm">
+     <input type="text" formControlName="firstName"  id="firstName" class="form-control" name="login" placeholder="Ad">
+      <input type="text" formControlName=" lastName"  id="lastName" class="form-control" name="login" placeholder="Soyad">
+      <input type="email" formControlName="email"  id="login" class="form-control" name="login" placeholder="E-mail">
+      <input type="password"  formControlName="password" id="password" class="form-control" name="login" placeholder="Şifre">
+      <input type="submit" (click)="register()"class="fadeIn fourth" value="Kayıt Ol">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" routerLink="/login" >Zaten üye misiniz? 
+</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+

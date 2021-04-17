@@ -4,10 +4,10 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div *ngIf="isAuthenticated()"class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="cars">Anasayfa</a>
+            <a class="nav-link active" aria-current="page" routerLink="/cars">Anasayfa</a>
           </li>
        <!--<li class="nav-item">
             <a class="nav-link" href="#">Link</a>
@@ -29,6 +29,8 @@
               <li><a class="dropdown-item" routerLink="/brandlist"href="#">Marka İşlemleri</a></li>
             
               <li><a class="dropdown-item" routerLink="/colorlist" href="#">Renk İşlemleri</a></li>
+               <li class="nav-item pl-1">
+					
             </ul>
           </li>
         
@@ -45,8 +47,11 @@
     </div>
     <div *ngIf="!isAuthenticated()">
       <form class="d-flex"> 
-        <button style="background-color: rgb(201, 241, 119);" class="btn btn-outline-success" routerLink="/register">Kayıt Ol</button>
-        <button style="background-color: rgb(201, 241, 119);" class="btn btn-outline-success" routerLink="/login">Giriş Yap</button>
+     
+     
+        <button  class="btn btn-outline-success" routerLink="/register">Kayıt Ol</button>
+        
+        <button  class="btn btn-outline-success" routerLink="/login">Giriş Yap</button>
       </form>
     </div>
     <div *ngIf="isAuthenticated()" class="dropdown">
@@ -55,13 +60,15 @@
               data-bs-toggle="dropdown" aria-expanded="false"> {{authService.name}} {{authService.surname}}</button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                <li><a class="dropdown-item" routerLink="/account"><b>Hesap Bilgileri</b></a></li>
+              
+                <button  style="width: 100px;" type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ <b> Çıkış Yap</b>
+</button>
                 
                
               </ul>
              <!-- Button trigger modal -->
-<button  style="background-color: red; width: 100px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Çıkış Yap
-</button>
+
 </form>
 
 <!-- Modal -->
@@ -74,8 +81,7 @@
       </div>
       
       <div class="modal-footer">
-        <button style="background-color: yellowgreen;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-        <button style="background-color:red;" (click)="logout()" type="button" class="btn btn-primary" data-bs-dismiss="modal" >Çıkış Yap</button>
+        <button  (click)="logout()" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" >Çıkış Yap</button>
       </div>
 
     </div>

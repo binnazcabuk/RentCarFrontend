@@ -1,12 +1,12 @@
 
 
-   <div *ngIf="isAuthenticated()"> 
+   <div > 
     <div class="mb-0">
       <input type="text" [(ngModel)]="brandText" class="form-control" id="brandText" placeholder="Marka Giriniz...">
     </div>
     <br>
     <select class="form-select" size="5" aria-label="size 3 select example" >
-  <option   selected>Markalar</option>
+  <option  routerLink="/cars" selected>Markalar</option>
   <option value="1"(click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" type="button"   [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands |brandPipe:brandText">{{ brand.brandName }} </option>
 
 </select>

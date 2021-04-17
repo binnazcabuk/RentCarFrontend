@@ -23,7 +23,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { RentalAddComponent } from './components/rental-add/rental-add.component';
 import{BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CarAddComponent } from './components/car-add/car-add.component';
-import { RentalComponent } from './components/rental/rental.component';
+
 import { CarListComponent } from './components/car-list/car-list.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { BrandListComponent } from './components/brand-list/brand-list.component';
@@ -36,6 +36,8 @@ import { AccountComponent } from './components/account/account.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { ColorListComponent } from './components/color-list/color-list.component';
+import { RegisterComponent } from './components/register/register.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -57,7 +59,7 @@ export function tokenGetter() {
     PaymentComponent,
     RentalAddComponent,
     CarAddComponent,
-    RentalComponent,
+ 
     CarListComponent,
     CarUpdateComponent,
     BrandListComponent,
@@ -67,7 +69,9 @@ export function tokenGetter() {
     AccountComponent,
     ColorAddComponent,
     ColorUpdateComponent,
-    ColorListComponent
+    ColorListComponent,
+    RegisterComponent,
+    FooterComponent
    
   ],
   imports: [

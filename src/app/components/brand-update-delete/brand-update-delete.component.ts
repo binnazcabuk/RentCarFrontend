@@ -16,7 +16,9 @@ export class BrandUpdateDeleteComponent implements OnInit {
   brands: Brand;
  
   brandUpdateForm: FormGroup;
-
+  brandId:number;
+  brandName:string;
+  model:string;
   
 
   constructor( private brandService: BrandService,
@@ -27,29 +29,32 @@ export class BrandUpdateDeleteComponent implements OnInit {
 
   ngOnInit(): void {
 
-   this.createBrandUpdateForm();
+  
 
    this.activatedRoute.params.subscribe((params) => {
      if (params['brandId']) {
        this.getBrandById(params['brandId']);
+       this.createBrandUpdateForm();
      }
    });
   }
 
   getBrandById(brandId: number) {
    this.brandService.getById(brandId).subscribe((response) => {
-     this.brands = response.data[0];
+     this.brands = response.data;
+     this.brandId= this.brands.brandId
+     this.brandName = this.brands.brandName
+     this.model=this.brands.model
     
-     this.createBrandUpdateForm();
      
    });
  }
 
   createBrandUpdateForm() {
    this.brandUpdateForm = this.formBuilder.group({
-     brandId: [this.brands.brandName, Validators.required],
-     brandName: [this.brands.brandName, Validators.required],
-     model:[this.brands.model, Validators.required]
+     brandId: [ Validators.required],
+     brandName: [ Validators.required],
+     model:[ Validators.required]
    });
  }
 

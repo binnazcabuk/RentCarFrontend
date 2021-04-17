@@ -28,7 +28,7 @@ export class ColorService {
   }
 
   getById(id: number): Observable<SingleResponseModel<Color>> {
-    let newPath = this.apiUrl + "colors/getbyid?id=" + id
+    let newPath = this.apiUrl2 + "colors/getbyid?id=" + id
     return this.httpClient.get<SingleResponseModel<Color>>(newPath)
   }
 }

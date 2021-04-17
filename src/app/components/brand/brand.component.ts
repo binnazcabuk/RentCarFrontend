@@ -15,11 +15,11 @@ export class BrandComponent implements OnInit {
   currentBrand: Brand;
  
   brandText="";
-  constructor(private brandService: BrandService,private authService:AuthService) { }
+  constructor(private brandService: BrandService) { }
 
   ngOnInit(): void {
     this.getBrands();
-    this.isAuthenticated();
+    
   }
   getBrands() {
     this.brandService.getBrands().subscribe((response) => {
@@ -45,13 +45,5 @@ export class BrandComponent implements OnInit {
     }
 }
 
-isAuthenticated(){
-  if(this.authService.isAuthenticated()){
-    return true
-    
-  }
-  else{
-    return false
-  }
- }
+
 }

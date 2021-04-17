@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Color } from 'src/app/models/color';
-import { AuthService } from 'src/app/services/auth.service';
+
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -14,11 +14,11 @@ export class ColorComponent implements OnInit {
   currentColor: Color;
 colorText="";
 
-  constructor(private colorService: ColorService,private authService:AuthService) { }
+  constructor(private colorService: ColorService) { }
 
   ngOnInit(): void {
     this.getColors();
-    this.isAuthenticated();
+
   }
   getColors() {
     this.colorService.getColors().subscribe((response) => {
@@ -39,13 +39,4 @@ colorText="";
     }
 }
 
-isAuthenticated(){
-  if(this.authService.isAuthenticated()){
-    return true
-    
-  }
-  else{
-    return false
-  }
- }
 }

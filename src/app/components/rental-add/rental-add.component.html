@@ -2,30 +2,38 @@
     <div  class="col-lg"   >
      
         
-    <h5 class="card-header">Araç Kirala</h5>
+    <h5 class="card-header text-center"> <img src="assets/img/insurance.png"  ><b>Araç Kirala</b> </h5>
     <div class="card-body" >
         <div class="mb-3 row">
-            <label for="inputPassword" class="col-lg-auto col-form-label">Ücret</label>
-            <div class="col-lg" *ngFor="let car of cars">
+            <label for="inputPassword" class="col-2">Ücret: </label>
+            <div class="col-10" *ngFor="let car of cars">
                 <input class="form-control" type="text" placeholder="{{car.dailyPrice | currency: '₺'}}"
                     aria-label="Disabled input example" disabled>
             </div>
         </div>
-        <div class="row"  >
+      <div class="mb-3 row">
+        <label for="inputPassword" class="col-2 ">Müşteri Id:</label>
+        <div class="col-10">
           <input class="form-control" type="text" placeholder="{{customers.userId}}"
            value="{{customers.userId}}"
             aria-label="Disabled input example" disabled>
-
+</div>
         </div>
-        
-        <label for="example-date-input" class="col-lg-auto col-form-label">Başlangıç</label>
-        
+         <div class="mb-3 row">
+        <label for="example-date-input" class="col-2">Başlangıç Tarihi:</label>
+          <div class="col-10">
         <input [(ngModel)]="rentDateValue" class="form-control" min="{{ getRentMinDate() }}" value="{{ getRentMinDate() }}" type="date"
             [(ngModel)]="rentDate" />
-          
-        <label for="example-date-input" class="col-4 col-form-label">Bitiş</label>
+          </div>
+</div>
+
+ <div class="mb-3 row">
+        <label for="example-date-input" class="col-2">Bitiş Tarihi:</label>
+          <div class="col-10">
         <input class="form-control" type="date" min="{{ getReturnMinDate() }}" value="{{ getReturnMinDate() }}"
             [(ngModel)]="returnDate" />
+</div>
+</div>
         <div class="d-grid gap-2">
 
         <button *ngIf="rentFlag" class="btn btn-warning btn-block mt-3"  >findex yetersiz

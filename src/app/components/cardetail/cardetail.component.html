@@ -2,7 +2,7 @@
   
   <div class="card-header text-center">
     <div class="card-body">
-      <div  *ngFor="let car of cars"class="card-header">{{car.brandName}} / {{car.model}}</div>
+      <div  *ngFor="let car of cars"class="card-header">{{car.brandName}} </div>
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner  d-flex "
            style="height: 50vh; min-height: 20rem; max-height: 30rem">
@@ -55,6 +55,7 @@
               <th>Renk</th>
               <th>Model Yılı</th>
               <th>Fiyat</th>
+              <th>Findex Score</th>
               <th>Açıklama</th>
               
               
@@ -67,6 +68,7 @@
           <td>{{car.colorName}}</td>
           <td>{{car.modelYear}}</td>
           <td>{{car.dailyPrice | currency: '₺' }}</td>
+          <td>{{ car.minFindexScore}}</td>
           <td>{{car.description}}</td>
       </tr>
   
@@ -75,8 +77,8 @@
   
        
           <div class="action">
-            <div *ngIf="rentFlag"  class="alert alert-danger"><b>ARAÇ KİRALANMIŞ</b></div>
-            <button *ngIf="!rentFlag"  class="add-to-cart btn btn-default" routerLink="/cardetail/rental/{{car.carId}}">Kirala
+            <button *ngIf="rentFlag"  class="btn btn-outline-danger"><b>ARAÇ KİRALI</b></button>
+            <button *ngIf="!rentFlag" type="button" class="btn btn-outline-info" routerLink="/cardetail/rental/{{car.carId}}">Kirala
              
             </button>
             

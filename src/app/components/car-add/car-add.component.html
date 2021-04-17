@@ -6,7 +6,8 @@
             <i class="bi-plus-square me-1"></i> Yeni Araba Ekle
          </div>
          <div class="card-body">
-            <form autocomplete="off" [formGroup]="carAddForm" (ngSubmit)="add()">
+         
+            <form autocomplete="off" [formGroup]="carAddForm">
 
                <div class="form-floating mb-3">
                   <select class="form-select" id="brands" formControlName="brandId">
@@ -46,6 +47,12 @@
                   <input type="text" class="form-control" id="dailyPrice" placeholder="dailyPrice"
                          formControlName="dailyPrice">
                   <label for="dailyPrice">Günlük Ücret - ₺</label>
+               </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="minFindexScore" placeholder=" minFindexScore"
+                         formControlName="minFindexScore">
+                  <label for="minFindexScore">Findex Puanı</label>
                </div>
 
                <div class="text-end">

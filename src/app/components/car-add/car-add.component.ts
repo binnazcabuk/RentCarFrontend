@@ -3,6 +3,7 @@ import{FormGroup,FormBuilder,FormControl,Validators} from"@angular/forms";
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
+import { CarImage } from 'src/app/models/carImages';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarImagesService } from 'src/app/services/car-images.service';
@@ -15,6 +16,7 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class CarAddComponent implements OnInit {
 
+carImageAddForm:FormGroup;
   carAddForm: FormGroup;
   brands: Brand[] = [];
   colors: Color[] = [];
@@ -27,6 +29,7 @@ export class CarAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCarAddForm();
+   
     this.getBrands();
     this.getColors();
   }
@@ -37,9 +40,11 @@ export class CarAddComponent implements OnInit {
        colorId: ['', Validators.required],
        modelYear: ['', Validators.required],
        dailyPrice: ['', Validators.required],
-       description: ['', Validators.required]
+       description: ['', Validators.required],
+       minFindexScore:['', Validators.required],
     });
  }
+
 
  getBrands() {
     this.brandService.getBrands().subscribe(responseSuccess => {
@@ -64,6 +69,7 @@ export class CarAddComponent implements OnInit {
   car.colorId = Number(car.colorId);
   car.modelYear = String(car.modelYear);
   car.dailyPrice = Number(car.dailyPrice);
+  car.minFindexScore=Number(car.minFindexScore);
 
   if (!this.carAddForm.valid) {
      this.toastrService.warning('Lütfen boş bilgi bırakmayın', 'Dikkat');

@@ -11,6 +11,11 @@
     border-collapse: collapse;
     
   }
+  .btn{
+    margin: 0 auto;
+    margin-left: 300px;
+    width: 110px;
+  }
 
   .table th {
     width: 800px;

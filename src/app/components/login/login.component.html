@@ -1,31 +1,30 @@
+
 <body class="text-center">
-    
-<main class="form-signin">
-  <form [formGroup]="loginForm">
-    
-    <h1 class="h3 mb-3 fw-normal">Giriş Yap</h1>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Giriş Yap </h2>
+  
 
-    <div class="form-floating">
-      <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-      <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/img/user.png" id="icon" alt="User Icon" />
     </div>
 
-    <div class="checkbox mb-3">
-      
+    <!-- Login Form -->
+    <form  [formGroup]="loginForm">
+      <input type="email" formControlName="email"  id="login" class="form-control" name="login" placeholder="e-mail">
+      <input type="password"  formControlName="password" id="password" class="form-control" name="login" placeholder="şifre">
+      <input type="submit" (click)="login()"class="fadeIn fourth" value="Giriş Yap">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" routerLink="/register">Kayıt Ol</a>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" (click)="login()">Giriş Yap</button>
-    <p class="divider-text">
-        <span class="bg-light">Hesabın yok mu? Kayıt Ol</span>
-    </p>
-        <button class="w-100 btn btn-lg btn-primary" routerLink="/register" >Kayıt Ol</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-  </form>
-</main>
 
+  </div>
+</div>
 
-    
-  </body>
+</body>
+

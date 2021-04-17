@@ -14,6 +14,9 @@ export class ColorUpdateComponent implements OnInit {
 
   color: Color
   colorUpdateForm: FormGroup
+  colorId:number;
+  colorName:string;
+
   constructor(private colorService: ColorService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
@@ -25,19 +28,27 @@ export class ColorUpdateComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params['colorId']) {
         this.getColor(params['colorId']);
+        this.createColorForm();
       }
     });
   }
 
   getColor(id:number){
-    this.colorService.getById(id).subscribe(response =>
-      this.color = response.data
-    )
-    this.createColorForm()
+  
+    this.colorService.getById(id).subscribe((response) => {
+      this.color = response.data;
+      this.colorId= this.color.colorId
+      this.colorName = this.color.colorName
+    
+     
+      
+    });
+    
   }
   createColorForm() {
     this.colorUpdateForm = this.formBuilder.group({
-      colorName: ["color.colorName", Validators.required]
+      colorId:[ Validators.required],
+      colorName:[ Validators.required]
     })
   }
 

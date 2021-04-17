@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { start } from 'node:repl';
 import { Car } from 'src/app/models/car';
-import { CarImage } from 'src/app/models/carimage';
+import { CarImage } from 'src/app/models/carImages';
 import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { CarDetailService } from 'src/app/services/car-detail.service';

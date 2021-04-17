@@ -1,5 +1,5 @@
 
-  <div *ngIf="isAuthenticated()" class="list-group">
+  <div  class="list-group">
     <div class="mb-0">
       <label for="filterText" class="form-label">Renk Ara</label>
       <input type="text" [(ngModel)]="colorText" class="form-control" id="colorText" placeholder="Renk Giriniz...">
@@ -7,7 +7,7 @@
     <br>
 
      <select class="form-select" size="5" aria-label="size 3 select example" >
-  <option   selected>Renkler</option>
+  <option routerLink="/cars"   selected>Renkler</option>
   <option value="1"(click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}" type="button"   [class]="getCurrentColorClass(color)" *ngFor="let color of colors |colorPipe:colorText">{{color.colorName}}</option>
 
 </select>

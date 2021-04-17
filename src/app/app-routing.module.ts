@@ -17,6 +17,8 @@ import { AccountComponent } from './components/account/account.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { ColorListComponent } from './components/color-list/color-list.component';
+import { RegisterComponent } from './components/register/register.component';
+
 
 
 const routes: Routes = [  
@@ -31,6 +33,7 @@ const routes: Routes = [
 {path:"carlist",component:CarListComponent},
 {path:"car-add",component:CarAddComponent,canActivate:[LoginGuard]},
 {path:"carlist/update/:carId", component: CarUpdateComponent },
+
 {path:"brandlist", component:BrandListComponent},
 {path:"brand-add", component:BrandAddComponent},
 {path:"brandlist/update/:brandId", component:BrandUpdateDeleteComponent},
@@ -38,7 +41,8 @@ const routes: Routes = [
 {path:"account",component:AccountComponent},
 {path:"color-add",component:ColorAddComponent},
 {path:"colorlist/update/:colorId",component:ColorUpdateComponent},
-{path:"colorlist",component:ColorListComponent}
+{path:"colorlist",component:ColorListComponent},
+{path:"register",component:RegisterComponent}
 ];
 
 
