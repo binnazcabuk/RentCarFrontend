@@ -22,6 +22,10 @@
 
 -Kiralamalarda günlük ücretlerin hesaplanması
 
+##Ekran Alıntıları
+![RentCarFrontend - Google Chrome 2021-04-17 17-44-18](https://user-images.githubusercontent.com/34273337/115125401-7d5a0e80-9fd0-11eb-9192-547cb39510ff.gif)
+![RentCarFrontend-Google-Chrome-20](https://user-images.githubusercontent.com/34273337/115125403-8054ff00-9fd0-11eb-9ad3-aed4311f0ec6.gif)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
