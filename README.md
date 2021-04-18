@@ -25,6 +25,9 @@
 ## Ekran Alıntıları
 ### ![RentCarFrontend - Google Chrome 2021-04-17 17-44-18](https://user-images.githubusercontent.com/34273337/115125401-7d5a0e80-9fd0-11eb-9192-547cb39510ff.gif)
 ### ![RentCarFrontend-Google-Chrome-20](https://user-images.githubusercontent.com/34273337/115125403-8054ff00-9fd0-11eb-9ad3-aed4311f0ec6.gif)
+### ![RentCarFrontend-Google-Chrome-20 (3)](https://user-images.githubusercontent.com/34273337/115151376-42f67d00-a075-11eb-8921-ce626d7fbcd2.gif)
+### ![RentCarFrontend-Google-Chrome-20 (1)](https://user-images.githubusercontent.com/34273337/115151373-40942300-a075-11eb-857e-702601ea5346.gif)
+### ![RentCarFrontend-Google-Chrome-20](https://user-images.githubusercontent.com/34273337/115151371-3f62f600-a075-11eb-9847-0b86fb5f4106.gif)
 
 ## Development server
 
